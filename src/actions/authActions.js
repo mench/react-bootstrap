@@ -7,8 +7,11 @@ export const login = (email,password) => dispatch => {
         email:email,
         password:password
     }))
-        .then(res => dispatch({
-            type:LOGIN,
-            payload: res.data.body.token
-        }));
+        .then(res => {
+            localStorage.setItem('jwtToken',res.data.body.token);
+            dispatch({
+                type:LOGIN,
+                payload: res.data.body.token
+            })
+        });
 }
